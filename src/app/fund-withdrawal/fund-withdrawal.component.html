@@ -1,0 +1,355 @@
+<div fxLayout fxLayout.xs="column" fxLayoutAlign="left" fxLayoutGap="10px" fxLayoutGap.xs="0">       
+<div fxFlex="60%">
+    <mat-card>
+        <mat-toolbar class="mat-elevation-z5" color="primary">
+          <div fxFlex fxLayout fxLayoutAlign="center">
+             Fund Withdrawal
+          </div>
+        </mat-toolbar>
+        <mat-card-content>
+      <mat-tab-group mat-align-tabs="center" dynamicHeight>
+        <div class ="mat-tab-body-content">
+        <mat-tab label="Available Fund">
+
+          <br/>
+          <div>
+            <div class="myform1">
+                <p> Account No :  1234 </p>  <i class="fa fa-refresh fa-sm" style="text-align: right;"></i>
+              </div>
+              <div class="myform1">
+                <p > Account Name :  Phillips Future Pte Ltd - Client Portal test 22</p>
+              </div>
+
+              <div class="myform1">
+                <p> Fund as of :  {{today | date:'short'}}   </p>
+              </div>
+          
+            <mat-divider></mat-divider>
+            <br/>
+            <div class="example-container mat-elevation-z8">
+                <table mat-table [dataSource]="transactions">
+                  <!-- Item Column -->
+                  <ng-container matColumnDef="item">
+                    <th mat-header-cell *matHeaderCellDef> Currency </th>
+                    <td mat-cell *matCellDef="let transaction"> {{transaction.item}} </td>
+                    <td mat-footer-cell *matFooterCellDef> Total withdrawable amount </td>
+                  </ng-container>
+              
+                  <!-- Cost Column -->
+                  <ng-container matColumnDef="cost">
+                    <th mat-header-cell *matHeaderCellDef> Available balance </th>
+                    <td mat-cell *matCellDef="let transaction"> {{transaction.cost}} </td>
+                    <td mat-footer-cell *matFooterCellDef> {{getTotalCost() | currency:'SGD':'symbol'}} </td>
+                  </ng-container>
+              
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+                  
+                </table>
+               
+              </div>
+              <mat-divider></mat-divider>
+              <br/>
+              <mat-card-actions align="end">
+                <button mat-stroked-button color="primary" >Show Fund Breakdown</button>
+              </mat-card-actions>
+          </div>
+  
+        </mat-tab>
+        <mat-tab label="WithDrawal Form">
+          <div class="myform1">
+          <mat-form-field appearance="fill">
+            
+            <mat-label>Withdrawal Currency</mat-label>
+            <mat-select required>
+              <mat-option *ngFor="let option of pNames" [value]="option">
+                {{ option }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field hintLabel="Enter Amount" appearance="fill">
+            <mat-label>WithDrawal Amount</mat-label>
+            <i class="far fa-money-bill-alt" style="float: right;"></i>
+            <input matInput #input1  required>
+          </mat-form-field>
+</div>
+
+<div class="myform1">
+
+  <mat-form-field appearance="fill">
+    <mat-label>Withdrawal option</mat-label>
+    <mat-select  [(value)]="selected"  required>
+      <mat-option *ngFor="let wdoption of pOptions" [value]="wdoption" >
+        {{ wdoption }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" *ngIf="selected === 'Quick Cheque Deposit' ">
+    <mat-label>Bank Code</mat-label>
+    <mat-select  required>
+      <mat-option *ngFor="let option of pBankcodes" [value]="option">
+        {{ option }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+
+</div>
+
+<div class="myform1">
+
+  <mat-form-field appearance="fill" *ngIf="selected === 'Remittance to Bank' || selected === 'Quick Cheque Deposit' ">
+    <mat-label>Bank Name</mat-label>
+    <input matInput #input2  required>
+  </mat-form-field>
+
+<mat-form-field hintLabel="Max 7 characters" appearance="fill" *ngIf="selected === 'Internal Transfer Futures' || selected === 'Quick Cheque Deposit' || selected === 'Remittance to Bank'">
+  <mat-label>A/C no</mat-label>
+  <input matInput #input1  max-length = "7" required>
+  <mat-hint align="end">{{input1.value?.length || 0}}/7</mat-hint>
+
+</mat-form-field>
+</div>
+
+
+<div class="myform1">
+
+  <mat-form-field appearance="fill" *ngIf="selected === 'Internal Transfer Futures'|| selected === 'Authorization for cheque collection' ">
+    <mat-label>Name</mat-label>
+    <input matInput #input3  required >
+  </mat-form-field>     
+
+<mat-form-field  appearance="fill" *ngIf="selected === 'Authorization for cheque collection' ">
+  <mat-label>NRIC/Passport</mat-label>
+  <input matInput #input4  max-length = "7" required>
+
+</mat-form-field>
+
+</div>
+
+<div class="myform1">
+
+  <mat-form-field appearance="fill" *ngIf="selected === 'Remittance to Bank'">
+    <mat-label>Swift Code</mat-label>
+    <input matInput #input5 required> 
+  </mat-form-field>
+  
+<mat-form-field  appearance="fill" *ngIf="selected === 'Remittance to Bank'" >
+  <mat-label>Beneficiary</mat-label>
+  <input matInput #input6  required>
+</mat-form-field>
+
+</div>
+
+
+<div class="myform1">
+
+  <mat-form-field appearance="fill" *ngIf="selected === 'Internal Phillip Transfer'">
+    <mat-label>A/C No</mat-label>
+    <mat-select  required>
+      <mat-option *ngFor="let option of pInternalACnos" [value]="option">
+        {{ option }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+<mat-form-field  appearance="fill" *ngIf="selected === 'Remittance to Bank'|| selected === 'Internal Phillip Transfer'">
+  <mat-label>Others</mat-label>
+  <input matInput #input7  required>
+</mat-form-field>
+
+</div>
+
+<div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="center">
+  <button mat-raised-button color="primary" matTooltip="save form" class = "login-button" ><i class="fas fa-save"></i> Submit</button>
+  <button mat-raised-button color="primary" matTooltip="cancel" class = "login-button"> <i class="fas fa-ban"></i> Cancel</button>
+  <button mat-raised-button color="primary" matTooltip="terms and conditions" class = "login-button"><i class="fas fa-file-signature"></i>T & C</button>
+</div>
+<mat-divider>
+</mat-divider>
+<br/>
+<mat-card class="example-card" >
+  
+  <mat-card-content>
+      <p>1. Withdrawal request submitted after 09:15 AM will only be processed on the next working day.</p>
+     <p>2. Withdrawal request status will be updated after 1:00 PM on Client Portal</p>
+     <p> 3. No cancellation of withdrawal upon submission.</p>
+      <p> 4. If you require further assistance, you may contact us at 65-6538 0500.</p>
+  
+  </mat-card-content>
+</mat-card>
+        </mat-tab>
+
+      </div>
+      </mat-tab-group>
+
+
+</mat-card-content>
+</mat-card>
+</div>
+
+
+<div fxFlex="40%">
+  <mat-card>
+      <mat-toolbar class="mat-elevation-z5" color="primary">
+        <div fxFlex fxLayout fxLayoutAlign="center">
+          Transaction History 
+        </div>
+      </mat-toolbar>
+      <mat-card-content>
+    <mat-tab-group mat-align-tabs="center" dynamicHeight>
+      <div class ="mat-tab-body-content">
+      <mat-tab label="Current Month">
+        <br/>
+        <!-- <mat-radio-group aria-label="Select an option" style="justify-content: space-between;">
+          <mat-radio-button value="1">Processed(All)</mat-radio-button>
+          <mat-radio-button value="2">Pending Approval</mat-radio-button>
+          <mat-radio-button value="3">Approved</mat-radio-button>
+          <mat-radio-button value="4">Rejected</mat-radio-button>
+        </mat-radio-group> -->
+
+        <div class="myform1">
+          <mat-form-field appearance="fill">
+            
+            <mat-label>Transaction Status</mat-label>
+            <mat-select required>
+              <mat-option *ngFor="let option of pcStatus" [value]="option">
+                {{ option }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+</div>
+<br/>
+<br/>
+<div>
+        <i class="fa fa-refresh fa-lg" style="text-align: left;"></i><b style="float:right"> Updated date: {{today | date:'short'}}</b>
+      </div>
+      <mat-divider></mat-divider>
+<br/>
+<div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <!-- Item Column -->
+          <ng-container matColumnDef="orderNO">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Order No </th>
+            <td mat-cell *matCellDef="let transactionHistory"> {{transactionHistory.orderNO}} </td>
+          </ng-container>
+      
+          <!-- Cost Column -->
+          <ng-container matColumnDef="wdCurrency">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> WDCurrency </th>
+            <td mat-cell *matCellDef="let transactionHistory"> {{transactionHistory.wdCurrency}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="wdAmount">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> WDAmount </th >
+            <td mat-cell *matCellDef="let transactionHistory"> {{transactionHistory.wdAmount}} </td>
+          </ng-container>
+      
+          <!-- Cost Column -->
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+            <td mat-cell *matCellDef="let transactionHistory"> {{transactionHistory.status}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+            <td mat-cell *matCellDef="let transactionHistory"> {{transactionHistory.type}} </td>
+          </ng-container>
+      
+          <!-- Cost Column -->
+          <ng-container matColumnDef="time">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Time(s) </th>
+            <td mat-cell *matCellDef="let transactionHistory"> {{transactionHistory.time | date:'short'}} </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+          
+        </table>
+      </div>
+       <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+   
+      </mat-tab>
+      <mat-tab label="Past Month">
+        <br/>
+        <!-- <mat-radio-group aria-label="Select an option" >
+          <mat-radio-button value="1" style="margin-right: 10px;" > Approved</mat-radio-button>
+          <mat-radio-button value="2" >Rejected</mat-radio-button>
+        </mat-radio-group> -->
+
+        <div class="myform1">
+          <mat-form-field appearance="fill">
+            
+            <mat-label>Transaction Status</mat-label>
+            <mat-select required>
+              <mat-option *ngFor="let option of ppStatus" [value]="option">
+                {{ option }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+</div>
+<br/>
+<br/>
+<div>
+  <i class="fa fa-refresh fa-lg" style="text-align: left;"></i><b style="float:right"> Updated date: {{today | date:'short'}}</b>
+</div>
+<mat-divider></mat-divider>
+<br/>
+<br/>
+ <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <!-- Item Column -->
+          <ng-container matColumnDef="orderNO">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Order No </th>
+            <td mat-cell *matCellDef="let transactionHistory"> {{transactionHistory.orderNO}} </td>
+          </ng-container>
+      
+          <!-- Cost Column -->
+          <ng-container matColumnDef="wdCurrency">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> WDCurrency </th>
+            <td mat-cell *matCellDef="let transactionHistory"> {{transactionHistory.wdCurrency}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="wdAmount">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> WDAmount </th >
+            <td mat-cell *matCellDef="let transactionHistory"> {{transactionHistory.wdAmount}} </td>
+          </ng-container>
+      
+          <!-- Cost Column -->
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+            <td mat-cell *matCellDef="let transactionHistory"> {{transactionHistory.status}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+            <td mat-cell *matCellDef="let transactionHistory"> {{transactionHistory.type}} </td>
+          </ng-container>
+      
+          <!-- Cost Column -->
+          <ng-container matColumnDef="time">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Time(s) </th>
+            <td mat-cell *matCellDef="let transactionHistory"> {{transactionHistory.time | date:'short'}} </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+          
+        </table>
+      </div>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+      </mat-tab>
+     
+    </div>
+    </mat-tab-group>
+
+
+</mat-card-content>
+</mat-card>
+</div>
+</div>
+    
+

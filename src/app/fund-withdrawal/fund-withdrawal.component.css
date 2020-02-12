@@ -1,0 +1,35 @@
+.example-container {
+    height: 270px;
+    overflow: auto;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  tr.mat-footer-row {
+    font-weight: bold;
+  }
+  
+  .mat-table-sticky {
+    border-top: 1px solid #e0e0e0;
+  }
+
+  .mat-row:nth-child(even){
+    background-color: cornflowerblue;
+    }
+
+    .mat-tab-body-content {
+      height: 100%;
+      overflow: auto;
+    }
+
+    .buttons .login{
+      padding-top: 2vh;
+      padding-bottom: 2vh;
+  }
+  
+  .buttons .login > button{
+      width: 100%;
+  }
+

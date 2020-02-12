@@ -1,0 +1,135 @@
+<mat-card style="text-align: center;">
+<ngb-carousel *ngIf="images" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
+    <ng-template ngbSlide *ngFor="let image of images">
+      <div class="picsum-img-wrapper">
+        <img [src]="image" alt="Random slide">
+      </div>
+    </ng-template>
+  </ngb-carousel>
+</mat-card>
+<br/>
+
+<div style=" width:1000px;margin:0 auto;">
+  <div fxLayoutAlign="flex-center">   
+    <div fxLayout="row wrap" fxLayoutGap="4px" fxLayoutAlign="flex-center" fxLayout.xs="row" style="height:100%">  
+    <div style="width:28rem;" *ngFor="let card of cards" >
+       <mat-card style="background-color:orangered;justify-content: center; border: 55px !important;border-radius: 30px !important;border: #000 !important;">
+         <mat-card-header style=" display: inline;" >{{card.accountType}}</mat-card-header>
+         <br/>
+         <br/>
+           <mat-card-content style="text-align: center;">
+                    {{card.accountNo}}
+            <button mat-stroked-button>View Balance</button>
+            <br/>
+            <h5>Available balance</h5>
+            <i class="fas fa-hand-holding-usd fa-2x"><span>100 SGD</span></i>
+           </mat-card-content>
+       </mat-card>
+      </div>
+    </div>  
+    </div>
+  </div>
+ 
+  
+  <div fxLayout fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="10" fxLayoutGap.xs="0" >   
+    <div fxFlex="60%">  
+  <mat-card>
+    <div class="row d-flex justify-content-center">
+      <h2 class="font-weight-bold pb-4">Our Features</h2>
+    </div>
+    <mat-tab-group [backgroundColor]="'primary'" dynamicHeight mat-stretch-tabs  >
+      <mat-tab label="EServices" >
+        <br/>
+        <div class ="row" style="text-align: center;">
+          <div class="col-4">
+            <i class="fas fa-handshake indigo-text fa-2x mb-4"></i>
+            <h6 class="font-weight-bold mb-4">Subscription for Platform/Exchanges</h6>
+           
+          </div>
+          <div class="col-4">
+            <i class="fas fa-funnel-dollar fa-2x mb-4"></i>
+            <h6 class="font-weight-bold mb-4">Fund Deposit</h6>
+           
+          </div>
+          <div class="col-4">
+            <i class="fas fa-coins blue-text fa-2x mb-4"></i>
+            <h6 class="font-weight-bold mb-4">FXInvest</h6>
+            
+          </div>
+
+          
+          <div class="col-xs-4">
+            <i class="fas fa-hand-holding-usd fa-2x mb-4"></i>
+            <h6 class="font-weight-bold mb-4">Fund Withdrawal</h6>
+           
+          </div>
+          <div class="col-xs-4">
+            <i class="fas fa-folder-open fa-2x mb-4"></i>
+            <h6 class="font-weight-bold mb-4">Other Forms</h6>
+           
+          </div>
+          <div class="col-xs-4">
+            <i class="fas fa-user-lock fa-2x mb-4"></i>
+            <h6 class="font-weight-bold mb-4">Password Reset for Trading Platforms</h6>
+            
+          </div>
+
+          
+          <div class="col-xs-4">
+            <i class="fas fa-user-edit fa-2x mb-4"></i>
+            <h6 class="font-weight-bold mb-4">Update Particulars</h6>
+           
+          </div>
+         
+
+        </div>
+
+      </mat-tab>
+      <mat-tab label="PortFolio" >
+        <br/>
+
+      </mat-tab>
+
+      </mat-tab-group>
+  </mat-card>
+</div>
+  </div>
+<br/>
+<br/>
+<mat-divider></mat-divider>
+<!-- Footer 2 -->
+<div class ="footer">
+<footer >
+  <div class="container">
+    <div class ="row">
+       <div class="col-sm-12 text-center">
+         <div>
+          <a href="#"><i class="fa fa-user-circle fa-2x"></i></a>
+          <h6>User Profile</h6>
+        </div>
+        <div fxFlex></div>
+        <div>
+          <a href="#"><i class="fa fa-twitter fa-2x"></i></a>
+          <h6>Twitter</h6>
+        </div>
+          <div fxFlex></div>
+          <div>
+          <a href="#"><i class="fas fa-map-marker-alt fa-2x"></i></a>
+          <h6>our branches</h6>
+        </div>
+          <div fxFlex></div>
+          <div>
+          <a href="#"><i class="fas fa-phone fa-2x"></i></a>
+          <h6>Contact Us</h6>
+        </div>
+          <div fxFlex></div>
+          <div>
+          <a href="#"><i class="fas fa-bell fa-2x"></i></a>
+          <h6>Notifications</h6>
+        </div>
+       </div>
+       
+     </div>
+  </div>    
+</footer>
+</div>

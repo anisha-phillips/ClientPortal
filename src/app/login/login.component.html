@@ -1,0 +1,63 @@
+<mat-toolbar style=" background-color: #002E52; color: white;">
+  <span>Login</span>
+</mat-toolbar>
+<div class="container-fluid">
+    <div class="row">
+      <div class ="col-sm-4"></div>
+      <div class ="col-sm-4">
+        <div style="margin-top: 30px;">
+  <mat-card>
+          <div class="login-sec">
+            <h2 class="text-center">Client Portal</h2>
+            <mat-card-content>
+            <br />
+            <form [formGroup]="loginForm" (ngSubmit)="loginForm.valid && onLoginSubmit()" novalidate>
+              <div class="myform">
+                <div class="myform1">
+                  <mat-form-field hintLabel="Min 4,Max 5 characters" appearance="fill">
+                    <mat-label>User Id</mat-label>
+                    <input matInput #input1 formControlName="userID"
+                    [(ngModel)]="user.userID" max-length = "5" required>
+                    <mat-icon matSuffix>account_circle</mat-icon>
+                    <mat-hint align="end">{{input1.value?.length || 0}}/5</mat-hint>
+                  </mat-form-field>
+    
+                </div>
+    
+                <div class="myform1">
+                  <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input matInput #input2 formControlName="password"
+                    [(ngModel)]="user.password" required
+                    [type]="hide ? 'password':'text'" />
+                    <mat-icon matSuffix (click)="hide = !hide">
+                      {{hide ? 'visibility' : 'visibility_off'}}
+                    </mat-icon>
+                    <mat-hint align="end">{{input2.value?.length || 0}}/10</mat-hint>
+                  </mat-form-field>
+    
+                </div>
+              </div>
+            </form>
+      
+          </mat-card-content>
+          <mat-divider class="matdivider"></mat-divider>
+          <mat-card-actions>
+           
+            <button mat-raised-button (click)="onLoginSubmit()" [disabled]="!loginForm.valid" class="login-button">
+                <mat-icon>input</mat-icon>
+             Login
+            </button>
+            <mat-divider class="divider"></mat-divider>
+            <br/>
+            <br/>
+          </mat-card-actions>
+          <br/>
+        </div>
+        </mat-card>
+      </div>
+      </div>
+      <div class ="col-sm-4"></div>
+    </div>
+  
+</div>

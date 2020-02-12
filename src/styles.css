@@ -1,0 +1,164 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '../node_modules/@angular/material/prebuilt-themes/indigo-pink.css';
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.centerDiv{
+margin : 0 auto;
+
+}
+
+.carousel-caption {
+  top: 0;
+  bottom: auto;
+}
+.full-bg-img {
+  background: linear-gradient(45deg, rgba(242, 34, 50, 0.5), rgba(255, 187, 54, 0.6) 100%);
+ height: 100%;
+ width: 100%;
+}
+
+
+.spacer {
+    flex-grow: 1;
+}
+
+.medium-list {
+    margin: auto;
+    width: 600px;
+    padding: 10px;
+  }
+     
+  .list-viewer-wrapper {
+    border: 1px solid rgba(0, 0, 0, .03);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .24), 0 0 2px rgba(0, 0, 0, .12);
+    margin: 4px;
+  }
+
+  .full-width {
+    width: 60%;
+  }
+  
+  .list-header-title {
+    color: rgba(0, 0, 0, 0.54);
+    background: rgba(0, 0, 0, .03);
+    padding: 8px 20px;
+    font-weight: bold;
+  }
+  
+  .form-container {
+    display: flex;
+    flex-direction: column;
+  }
+ 
+  .divider {
+    margin-top: 10px !important; 
+  }
+
+
+.medium-list {
+    margin: auto;
+    width: 600px;
+    padding: 10px;
+  }
+
+  .list-viewer-wrapper {
+    border: 1px solid rgba(0, 0, 0, .03);
+    box-shadow: 0 2px 2px rgba(196, 146, 146, 0.24), 0 0 2px rgba(0, 0, 0, .12);
+    margin: 4px;
+  }
+
+  .full-width {
+    width: 60%;
+  }
+
+  .list-header-title {
+    color: rgba(0, 0, 0, 0.54);
+    background: rgba(0, 0, 0, .03);
+    padding: 8px 20px;
+    font-weight: bold;
+  }
+
+  .login-button{
+    width: 40%;
+    }
+
+  .form-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  
+
+.myform {
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  overflow: auto;
+}
+
+  .myform > * {
+    width: 100%;
+  }
+
+  .mat-icon {
+    margin-right: 10px;
+  }
+
+.myform1 {
+  display: flex;
+  flex-direction: row;
+  font-size: 18px;
+  overflow: auto;
+}
+
+  .myform1 > * {
+    width: 100%;
+  }
+
+ 
+
+  .example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
+}
+
+.mt-alerts {
+  position:fixed;
+  z-index: 1000;
+}
+
+.toolbar-fullscreen {
+  display: none;
+}
+
+.toolbar-filler {
+  flex: 1 1 auto
+}
+
+.mat-row:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+
+.login-sec{padding: 50px 30px; position:relative;}
+.login-sec .copy-text{position:absolute; width:80%; bottom:20px; font-size:13px; text-align:center;}
+.login-sec .copy-text i{color:#002E52;}
+.login-sec .copy-text a{color:#002E52;}
+.login-sec h6{margin-bottom:30px; font-weight:800; font-size:30px; color: #002E52;}
+.login-sec h6:after{content:" "; width:100px; height:5px; background:#002E52; display:block; margin-top:20px; border-radius:3px; margin-left:auto;margin-right:auto}
+.login-block{
+  background: #002E52;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #FFB88C, #DE6262);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #FFB88C, #DE6262); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+float:left;
+}
+
+.container{background:#fff; border-radius: 20px; box-shadow:25px 20px 0px rgba(0,0,0,0.1);}
+
+
+
